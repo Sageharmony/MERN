@@ -60,19 +60,27 @@ function App() {
   })
   }
 
+  useEffect(()=>{
+    axios
+        .get('http://localhost:3000/cars')
+        .then((response)=>{
+        	setCar(response.data);
+        })
+},[])
 
   return (
     <>
     <h1>Dealership.</h1>
     <h4>For People Who Know About Cars.</h4>
-    <form>
-      <input type='text' value='name'></input>
-      <input type='text' value=' manufacturer'></input>
-      <input type="number" value='year'></input>
-      <input type='text' value='mpg'></input>
-      <input type='text' value='transmission'></input>
-      <input type='text' value='style'></input>
-      <input type='number' value='price'></input>
+    <form onSubmit={addNewCar}>
+      Name: <input type='text' onChange={handleCarName}></input>
+      manufacturer: <input type='text' onChange={handleCarBrand}></input>
+      year: <input type="number" onChange={handleCarYear}></input>
+      mpg: <input type='text' onChange={handleCarMpg}></input>
+      transmission: <input type='text' onChange={handleCarTrans}></input>
+      style: <input type='text' onChange={handleCarStyle}></input>
+      price: <input type='number' onChange={handleCarPrice}></input>
+      <input type="submit" value='Add Car'/>
     </form>
 
     </>
