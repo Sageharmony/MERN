@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import './';
 
 
 function App() {
@@ -60,21 +61,91 @@ function App() {
   })
   }
 
+  const handleCarUpdate = (event, carsData) =>{
+    event.preventDefault();
+    axios.put(
+      `http://localhost:3000/cars/${carsData._id}`,
+      {
+          name: carName,
+          manufacturer: carBrand, 
+          year: carYear,
+          mpg: carMpg,
+          transmission: carTrans,
+          style: carStyle,
+          price: carPrice,
+      }
+        ) 
+        .then(()=>{
+          axios
+          .get('http://localhost:3000/cars')
+          .then((response)=>{
+            setCar(response.data)
+          })
+        }) 
+}
+
+const handleDelete=(carsData)=>{
+    axios
+    .delete(`http://localhost:3000/cars/${carsData._id}`,)
+    .then(()=>{
+      axios
+      .get('http://localhost:3000/cars')
+      .then((response)=>{
+        setCar(response.data)
+      })
+    
+    })
+}
+  useEffect(()=>{
+    axios
+        .get('http://localhost:3000/cars')
+        .then((response)=>{
+        	setCar(response.data);
+        })
+},[])
+
 
   return (
     <>
     <h1>Dealership.</h1>
     <h4>For People Who Know About Cars.</h4>
-    <form>
-      <input type='text' value='name'></input>
-      <input type='text' value=' manufacturer'></input>
-      <input type="number" value='year'></input>
-      <input type='text' value='mpg'></input>
-      <input type='text' value='transmission'></input>
-      <input type='text' value='style'></input>
-      <input type='number' value='price'></input>
+    <form onSubmit={addNewCar}>
+      Name: <input type='text' onChange={handleCarName}></input>
+      manufacturer: <input type='text' onChange={handleCarBrand}></input>
+      year: <input type="number" onChange={handleCarYear}></input>
+      mpg: <input type='text' onChange={handleCarMpg}></input>
+      transmission: <input type='text' onChange={handleCarTrans}></input>
+      style: <input type='text' onChange={handleCarStyle}></input>
+      price: <input type='number' onChange={handleCarPrice}></input>
+      <input type="submit" value='Add Car'/>
     </form>
+    <h1>Current Cars</h1>
+    {car.map((cars) =>{
+      return(
+        <div key={cars._id}>
+        <h1>{cars.name}</h1>
+        <p>{cars.manufacturer}</p>
+        <p>{cars.year}</p>
+        <p>{cars.mpg}</p>
+        <p>{cars.transmission}</p>
+        <p> {cars.style}</p>
+        <p> {cars.price}</p>
+        <form onSubmit={(event) => { handleCarUpdate(event, cars) }}>
+              Name: <input type="text" onChange={handleCarName}/><br/>
+              manufacturer: <input type="text" onChange={handleCarBrand}/><br/>
+              year: <input type="text" onChange={handleCarYear}/><br/>
+              mpg: <input type="text" onChange={handleCarMpg}/><br/>
+              transmission: <input type="text" onChange={handleCarTrans}/><br/>
+              style: <input type="text" onChange={handleCarStyle}/><br/>
+              price: <input type="text" onChange={handleCarPrice}/><br/>
+              <input type="submit" value="Update Car Listing"/>
+            </form>
 
+        <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
+        </div>
+        
+      )
+    })}
     </>
   )
 }
