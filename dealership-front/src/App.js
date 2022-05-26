@@ -82,7 +82,20 @@ function App() {
       price: <input type='number' onChange={handleCarPrice}></input>
       <input type="submit" value='Add Car'/>
     </form>
-
+    <h1>Current Cars</h1>
+    {car.map((cars) =>{
+      return(
+        <div>
+        <h1>{cars.name}</h1>
+        <p>{cars.manufacturer}</p>
+        <p>{cars.year}</p>
+        <p>{cars.mpg}</p>
+        <p>{cars.transmission}</p>
+        <p> {cars.style}</p>
+        <p> {cars.price}</p>
+        </div>
+      )
+    })}
     </>
   )
 }
