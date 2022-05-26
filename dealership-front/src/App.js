@@ -109,8 +109,8 @@ const handleDelete=(carsData)=>{
     <h1>Dealership.</h1>
     <h4>For People Who Know About Cars.</h4>
     <form onSubmit={addNewCar}>
-      Name: <input type='text' onChange={handleCarName}></input>
-      manufacturer: <input type='text' onChange={handleCarBrand}></input>
+      Name: <input type='text' value={car.name || ''}onChange={handleCarName}></input>
+      manufacturer: <input type='text' value={car.manufacturer || ''} onChange={handleCarBrand}></input>
       year: <input type="number" onChange={handleCarYear}></input>
       mpg: <input type='text' onChange={handleCarMpg}></input>
       transmission: <input type='text' onChange={handleCarTrans}></input>
