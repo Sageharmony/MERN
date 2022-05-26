@@ -6,19 +6,19 @@ div{
 }
 
 .newCar{
-  border: blue solid 1px;
+  
   display:inline-block;
   text-transform: capitalize;
 }
 
 .updateCar{
-  border: red solid 1px;
+  
   display:inline-block;
   align-self: center;
   text-transform: capitalize;
 }
  .carInfo{
-   border: 1px green solid;
+  
    margin: auto 0;
    text-transform: capitalize;
  }
