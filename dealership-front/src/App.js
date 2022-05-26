@@ -61,18 +61,18 @@ function App() {
   })
   }
 
-  const handleCarUpdate = (carsData) =>{
-    axios
-    .put(
+  const handleCarUpdate = (event, carsData) =>{
+    event.preventDefault();
+    axios.put(
       `http://localhost:3000/cars/${carsData._id}`,
       {
-          name: carsData.name,
-          manufacturer: carsData.brand, 
-          year: carsData.year,
-          mpg: carsData.mpg,
-          transmission: carsData.trans,
-          style: carsData.style,
-          price: carsData.price,
+          name: carName,
+          manufacturer: carBrand, 
+          year: carYear,
+          mpg: carMpg,
+          transmission: carTrans,
+          style: carStyle,
+          price: carPrice,
       }
         ) 
         .then(()=>{
@@ -104,6 +104,7 @@ const handleDelete=(carsData)=>{
         })
 },[])
 
+
   return (
     <>
     <h1>Dealership.</h1>
@@ -129,20 +130,17 @@ const handleDelete=(carsData)=>{
         <p>{cars.transmission}</p>
         <p> {cars.style}</p>
         <p> {cars.price}</p>
+        <form onSubmit={(event) => { handleCarUpdate(event, cars) }}>
+              Name: <input type="text" onChange={handleCarName}/><br/>
+              manufacturer: <input type="text" onChange={handleCarBrand}/><br/>
+              year: <input type="text" onChange={handleCarYear}/><br/>
+              mpg: <input type="text" onChange={handleCarMpg}/><br/>
+              transmission: <input type="text" onChange={handleCarTrans}/><br/>
+              style: <input type="text" onChange={handleCarStyle}/><br/>
+              price: <input type="text" onChange={handleCarPrice}/><br/>
+              <input type="submit" value="Update Car Listing"/>
+            </form>
 
-        <form onSubmit={(event)=> {handleCarUpdate (car)} }>
-        Name: <input type='text' onChange={handleCarName}></input>
-        manufacturer: <input type='text'  onChange={handleCarBrand}></input>
-        year: <input type="number"   onChange={handleCarYear}></input>
-        mpg: <input type='text'  onChange={handleCarMpg}></input>
-        transmission: <input type='text' onChange={handleCarTrans}></input>
-        style: <input type='text'  onChange={handleCarStyle}></input>
-        price: <input type='number' onChange={handleCarPrice}></input>
-        <input type="submit" value='Update Car Listing'/>
-        {/* <button type="submit" onClick={handleCarUpdate}>Update This Car Listing</button> */}
-      </form>
-
-        {/* <button onClick={(event) => handleCarUpdate(cars)}>Update This Car Listing</button> */}
         <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
         </div>
         
