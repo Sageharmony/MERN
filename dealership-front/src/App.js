@@ -107,8 +107,11 @@ const handleDelete=(carsData)=>{
 
   return (
     <>
-    <h1>Dealership</h1>
-    <h4>For People Who Know About Cars</h4>
+    <h1 className="title is-2">Cupid Dealership</h1>
+    <h4 className="subtitle is-5">For The Car Lovers 	
+&#10084;</h4>
+    
+
     <form className="newCar is-form"onSubmit={addNewCar}>
       Name: <input type='text' onChange={handleCarName}></input>
       manufacturer: <input type='text' onChange={handleCarBrand}></input>
@@ -119,7 +122,7 @@ const handleDelete=(carsData)=>{
       price: <input type='number' onChange={handleCarPrice}></input>
       <input type="submit" value='Add Car'/>
     </form>
-    <h1 className="title is-3 ">Current Cars</h1>
+    <h1 className="title is-3">Find Your Next Love</h1>
     {car.map((cars) =>{
       return(
         <div key={cars._id}>

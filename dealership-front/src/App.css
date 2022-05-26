@@ -23,6 +23,9 @@ div{
    text-transform: capitalize;
  }
 
+h1, h4{
+  text-align:center;
+}
 
 body{
   display:flex;
