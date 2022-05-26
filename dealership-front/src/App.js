@@ -14,7 +14,7 @@ function App() {
   const [carTrans, setCarTrans] = useState('')
   const [carStyle, setCarStyle] = useState('')
   const [carPrice, setCarPrice] = useState(13000)
-
+  const [carImg, setCarImg] = useState('')
   
   const handleCarName = (event) =>{
     setCarName(event.target.value)
@@ -37,6 +37,9 @@ function App() {
   const handleCarPrice = (event) =>{
     setCarPrice(event.target.value)
   }
+  const handleCarImg = (event) =>{
+    setCarImg(event.target.value)
+  }
 
 
   const addNewCar = (event) =>{
@@ -45,6 +48,7 @@ function App() {
     'http://localhost:3000/cars',
     {
       name: carName,
+      image: carImg,
       manufacturer: carBrand, 
       year: carYear,
       mpg: carMpg,
@@ -67,6 +71,7 @@ function App() {
       `http://localhost:3000/cars/${carsData._id}`,
       {
           name: carName,
+          image: carImg,
           manufacturer: carBrand, 
           year: carYear,
           mpg: carMpg,
@@ -107,13 +112,20 @@ const handleDelete=(carsData)=>{
 
   return (
     <>
+<<<<<<< HEAD
     <h1 className="title is-2">Cupid Dealership</h1>
     <h4 className="subtitle is-5">For The Car Lovers 	
 &#10084;</h4>
     
 
     <form className="newCar is-form"onSubmit={addNewCar}>
+=======
+    <h1 addClass="title">Dealership.</h1>
+    <h4>For People Who Know About Cars.</h4>
+    <form onSubmit={addNewCar}>
+>>>>>>> f7d2678b137f5d2a57dc1f88b13c277d21ba12e4
       Name: <input type='text' onChange={handleCarName}></input>
+      image: <input type='text' onChange={handleCarImg}></input>
       manufacturer: <input type='text' onChange={handleCarBrand}></input>
       year: <input type="number" onChange={handleCarYear}></input>
       mpg: <input type='text' onChange={handleCarMpg}></input>
@@ -126,6 +138,7 @@ const handleDelete=(carsData)=>{
     {car.map((cars) =>{
       return(
         <div key={cars._id}>
+<<<<<<< HEAD
         <div className="carInfo is-box">
         <p>Model:  {cars.name} {cars.manufacturer}</p>
         <p>Model Year: {cars.year}</p>
@@ -136,6 +149,19 @@ const handleDelete=(carsData)=>{
         </div>
         <form className="updateCar"onSubmit={(event) => { handleCarUpdate(event, cars) }}>
               Name: <input type="text" onChange={handleCarName}/><br/>
+=======
+        <h1>{cars.name}</h1>
+        <img addClass="img" src={cars.image}/>
+        <p>{cars.manufacturer}</p>
+        <p>{cars.year}</p>
+        <p>{cars.mpg}</p>
+        <p>{cars.transmission}</p>
+        <p> {cars.style}</p>
+        <p> {cars.price}</p>
+        <form onSubmit={(event) => { handleCarUpdate(event, cars) }}>
+              Name: <input type="text" onChange={handleCarName}></input><br/>
+              image: <input type='text' onChange={handleCarImg}/><br/>
+>>>>>>> f7d2678b137f5d2a57dc1f88b13c277d21ba12e4
               manufacturer: <input type="text" onChange={handleCarBrand}/><br/>
               year: <input type="text" onChange={handleCarYear}/><br/>
               mpg: <input type="text" onChange={handleCarMpg}/><br/>
