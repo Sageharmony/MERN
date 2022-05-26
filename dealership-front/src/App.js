@@ -60,6 +60,28 @@ function App() {
   })
   }
 
+  const handleCarUpdate = (carsData) =>{
+    axios
+    .put(
+      `http://localhost:3000/cars/${carsData._id}`,
+      {
+          name: carsData.name,
+          manufacturer: carsData.brand, 
+          year: carsData.year,
+          mpg: carsData.mpg,
+          transmission: carsData.trans,
+          style: carsData.style,
+          price: carsData.price,
+      }
+        ) 
+        .then(()=>{
+          axios
+          .get('http://localhost:3000/cars')
+          .then((response)=>{
+            setCarStyle(response.data)
+          })
+        }) 
+}
   useEffect(()=>{
     axios
         .get('http://localhost:3000/cars')
@@ -85,7 +107,7 @@ function App() {
     <h1>Current Cars</h1>
     {car.map((cars) =>{
       return(
-        <div>
+        <div key={cars._id}>
         <h1>{cars.name}</h1>
         <p>{cars.manufacturer}</p>
         <p>{cars.year}</p>
@@ -93,7 +115,9 @@ function App() {
         <p>{cars.transmission}</p>
         <p> {cars.style}</p>
         <p> {cars.price}</p>
+        <button onClick={(event) => handleCarUpdate(handleCarUpdate) } type="submit">Update This Car Listing</button>
         </div>
+        
       )
     })}
     </>
