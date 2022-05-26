@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import './';
 
 
 function App() {
@@ -60,6 +61,41 @@ function App() {
   })
   }
 
+  const handleCarUpdate = (carsData) =>{
+    axios
+    .put(
+      `http://localhost:3000/cars/${carsData._id}`,
+      {
+          name: carsData.name,
+          manufacturer: carsData.brand, 
+          year: carsData.year,
+          mpg: carsData.mpg,
+          transmission: carsData.trans,
+          style: carsData.style,
+          price: carsData.price,
+      }
+        ) 
+        .then(()=>{
+          axios
+          .get('http://localhost:3000/cars')
+          .then((response)=>{
+            setCar(response.data)
+          })
+        }) 
+}
+
+const handleDelete=(carsData)=>{
+    axios
+    .delete(`http://localhost:3000/cars/${carsData._id}`,)
+    .then(()=>{
+      axios
+      .get('http://localhost:3000/cars')
+      .then((response)=>{
+        setCar(response.data)
+      })
+    
+    })
+}
   useEffect(()=>{
     axios
         .get('http://localhost:3000/cars')
@@ -85,7 +121,8 @@ function App() {
     <h1>Current Cars</h1>
     {car.map((cars) =>{
       return(
-        <div>
+        <div key={cars._id}>
+        
         <h1>{cars.name}</h1>
         <p>{cars.manufacturer}</p>
         <p>{cars.year}</p>
@@ -93,7 +130,10 @@ function App() {
         <p>{cars.transmission}</p>
         <p> {cars.style}</p>
         <p> {cars.price}</p>
+        <button onClick={(event) => handleCarUpdate(cars)}>Update This Car Listing</button>
+        <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
         </div>
+        
       )
     })}
     </>
