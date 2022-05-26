@@ -26,26 +26,26 @@ app.use(cors());
 
 //CREATE
 app.post('/cars', (req,res)=>{
-    cars.create(req.body, (err, createdCars)=>{
+    Cars.create(req.body, (err, createdCars)=>{
         res.json(createdCars)
     })
 })
 //INDEX
 app.get('/cars', (req,res)=>{
-    cars.find({}, (err,foundCars)=>{
+    Cars.find({}, (err,foundCars)=>{
         res.json(foundCars)
     })
 });
 //DELETE
 app.delete('/cars/:id', (req,res)=>{
-cars.findByIdAndRemove(req.params.id, (err, deletedCars)=>{
+Cars.findByIdAndRemove(req.params.id, (err, deletedCars)=>{
     res.json(deletedCars);
 })
 });
 
 //UPDATE
 app.put('/cars/:id', (req,res)=>{
-cars.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updatedCars)=>{
+Cars.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updatedCars)=>{
     res.json(updatedCars)
 })
 })
