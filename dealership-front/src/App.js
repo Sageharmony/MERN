@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import './';
 
 
 function App() {
@@ -78,9 +79,22 @@ function App() {
           axios
           .get('http://localhost:3000/cars')
           .then((response)=>{
-            setCarStyle(response.data)
+            setCar(response.data)
           })
         }) 
+}
+
+const handleDelete=(carsData)=>{
+    axios
+    .delete(`http://localhost:3000/cars/${carsData._id}`,)
+    .then(()=>{
+      axios
+      .get('http://localhost:3000/cars')
+      .then((response)=>{
+        setCar(response.data)
+      })
+    
+    })
 }
   useEffect(()=>{
     axios
@@ -108,6 +122,7 @@ function App() {
     {car.map((cars) =>{
       return(
         <div key={cars._id}>
+        
         <h1>{cars.name}</h1>
         <p>{cars.manufacturer}</p>
         <p>{cars.year}</p>
@@ -115,7 +130,8 @@ function App() {
         <p>{cars.transmission}</p>
         <p> {cars.style}</p>
         <p> {cars.price}</p>
-        <button onClick={(event) => handleCarUpdate(handleCarUpdate) } type="submit">Update This Car Listing</button>
+        <button onClick={(event) => handleCarUpdate(cars)}>Update This Car Listing</button>
+        <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
         </div>
         
       )
