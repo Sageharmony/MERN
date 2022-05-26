@@ -1,4 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Anton:regular);
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css";
+
+div{
+  text-align:left;
+}
+
+.newCar{
+  
+  display:inline-block;
+  text-transform: capitalize;
+}
+
+.updateCar{
+  
+  display:inline-block;
+  align-self: center;
+  text-transform: capitalize;
+}
+ .carInfo{
+  
+   margin: auto 0;
+   text-transform: capitalize;
+ }
+
+h1, h4{
+  text-align:center;
+}
+
+body{
+  display:flex;
+  align-items:center;
+  font-family:'Anton', sans-serif;
+}
+
 .title{
-  font-family: 'Anton', sans-serif;
+text-align:center;
+margin-top: .7em;
 }

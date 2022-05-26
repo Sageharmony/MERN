@@ -14,7 +14,7 @@ function App() {
   const [carTrans, setCarTrans] = useState('')
   const [carStyle, setCarStyle] = useState('')
   const [carPrice, setCarPrice] = useState(13000)
-  const [carImg, setCarImg] = useState('')
+  const [carImg, setCarImg] = useState()
   
   const handleCarName = (event) =>{
     setCarName(event.target.value)
@@ -112,9 +112,12 @@ const handleDelete=(carsData)=>{
 
   return (
     <>
-    <h1 addClass="title">Dealership.</h1>
-    <h4>For People Who Know About Cars.</h4>
-    <form onSubmit={addNewCar}>
+    <h1 className="title is-2">Cupid's Dealership</h1>
+    <h4 className="subtitle is-5">For The Car Lovers 	
+&#10084;</h4>
+    
+
+    <form className="newCar"onSubmit={addNewCar}>
       Name: <input type='text' onChange={handleCarName}></input>
       image: <input type='text' onChange={handleCarImg}></input>
       manufacturer: <input type='text' onChange={handleCarBrand}></input>
@@ -125,20 +128,21 @@ const handleDelete=(carsData)=>{
       price: <input type='number' onChange={handleCarPrice}></input>
       <input type="submit" value='Add Car'/>
     </form>
-    <h1>Current Cars</h1>
+    <h1 className="title is-3">Find Your Next Love</h1>
     {car.map((cars) =>{
       return(
         <div key={cars._id}>
-        <h1>{cars.name}</h1>
+        <div className="carInfo is-box">
         <img addClass="img" src={cars.image}/>
-        <p>{cars.manufacturer}</p>
-        <p>{cars.year}</p>
-        <p>{cars.mpg}</p>
-        <p>{cars.transmission}</p>
-        <p> {cars.style}</p>
-        <p> {cars.price}</p>
-        <form onSubmit={(event) => { handleCarUpdate(event, cars) }}>
-              Name: <input type="text" onChange={handleCarName}></input><br/>
+        <p>Model:  {cars.name} {cars.manufacturer}</p> 
+        <p>Model Year: {cars.year}</p>
+        <p>Combined MPG: {cars.mpg}</p>
+        <p>Transmision: {cars.transmission}</p>
+        <p>Style: {cars.style}</p>
+        <p>Price: {cars.price}</p>
+        </div>
+        <form className="updateCar"onSubmit={(event) => { handleCarUpdate(event, cars) }}>
+              Name: <input type="text" onChange={handleCarName}/><br/>
               image: <input type='text' onChange={handleCarImg}/><br/>
               manufacturer: <input type="text" onChange={handleCarBrand}/><br/>
               year: <input type="text" onChange={handleCarYear}/><br/>
@@ -147,9 +151,10 @@ const handleDelete=(carsData)=>{
               style: <input type="text" onChange={handleCarStyle}/><br/>
               price: <input type="text" onChange={handleCarPrice}/><br/>
               <input type="submit" value="Update Car Listing"/>
+              <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
             </form>
 
-        <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
+        
         </div>
         
       )
