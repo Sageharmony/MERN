@@ -9,11 +9,11 @@ function App() {
   const [car, setCar] = useState([])
   const [carName, setCarName] = useState('') 
   const [carBrand, setCarBrand] = useState('')
-  const [carYear, setCarYear] = useState(1999)
+  const [carYear, setCarYear] = useState('')
   const [carMpg, setCarMpg] = useState('')
   const [carTrans, setCarTrans] = useState('')
   const [carStyle, setCarStyle] = useState('')
-  const [carPrice, setCarPrice] = useState(13000)
+  const [carPrice, setCarPrice] = useState('')
 
   
   const handleCarName = (event) =>{
@@ -122,7 +122,6 @@ const handleDelete=(carsData)=>{
     {car.map((cars) =>{
       return(
         <div key={cars._id}>
-        
         <h1>{cars.name}</h1>
         <p>{cars.manufacturer}</p>
         <p>{cars.year}</p>
@@ -130,7 +129,20 @@ const handleDelete=(carsData)=>{
         <p>{cars.transmission}</p>
         <p> {cars.style}</p>
         <p> {cars.price}</p>
-        <button onClick={(event) => handleCarUpdate(cars)}>Update This Car Listing</button>
+
+        <form onSubmit={(event)=> {handleCarUpdate (car)} }>
+        Name: <input type='text' onChange={handleCarName}></input>
+        manufacturer: <input type='text'  onChange={handleCarBrand}></input>
+        year: <input type="number"   onChange={handleCarYear}></input>
+        mpg: <input type='text'  onChange={handleCarMpg}></input>
+        transmission: <input type='text' onChange={handleCarTrans}></input>
+        style: <input type='text'  onChange={handleCarStyle}></input>
+        price: <input type='number' onChange={handleCarPrice}></input>
+        <input type="submit" value='Update Car Listing'/>
+        {/* <button type="submit" onClick={handleCarUpdate}>Update This Car Listing</button> */}
+      </form>
+
+        {/* <button onClick={(event) => handleCarUpdate(cars)}>Update This Car Listing</button> */}
         <button onClick={(event) => handleDelete(cars)}>Delete this Listing </button>
         </div>
         
